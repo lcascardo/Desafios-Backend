@@ -35,33 +35,13 @@ class ProductManager {
     }
 
     //AGREGA UN PRODUCTO NUEVO
-    addProduct = async (title, description, price, thumbnail, code, stock) => {
+    addProduct = async (product) => {
+        const db = await this.getProducts();
         try {
-
-            if (this.products.find(product => product.code !== code) || this.products.length === 0) {
-                if (title && description && price && thumbnail && code && stock) {
-                    const product = {
-                        title: title,
-                        description: description,
-                        price: price,
-                        thumbnail: thumbnail,
-                        code: code,
-                        stock: stock,
-                        id: this.id
-                    };
-                    this.id++;
-                    this.products.push(product);
-                    await this.writeFile(this.products);
-
-                }
-                else {
-                    console.log("ERROR: Falta rellenar campos");
-                }
-            }
-            else {
-                console.log("ERROR: El campo code se ha repetido");
-            }
-
+            let newId = Math.max(db.map(product => product.id)) + 1;
+            const newProduct = { ...product, id: newId };
+            db.push(newProduct);
+            await this.writeFile(db);
         }
 
         catch (err) {
@@ -85,12 +65,13 @@ class ProductManager {
     }
 
     //ACTUALIZA UN PRODUCTO FILTRANDO POR ID
-    updateProduct = async (id, title, description, price, thumbnail, code, stock) => {
+    updateProduct = async (id, product) => {
         const products = await this.getProducts();
+        const newProduct = product
         try {
             const updateProducts = products.map((product) => {
                 if (product.id === id) {
-                    return { ...product, title, description, price, thumbnail, code, stock };
+                    return { ...product, ...newProduct };
                 }
                 else {
                     return { ...product }
@@ -134,20 +115,36 @@ const test = async () => {
     // thumbnail:”Sin imagen”
     // code:”abc123”,
     // stock:25
-    await productos.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25)
+    const producto = {
+        title: "producto prueba",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
 
     // Se llamará el método “getProducts” nuevamente, esta vez debe aparecer el producto recién agregado
     console.log(await productos.getProducts());
 
     //Se llamará al método “getProductById” y se corroborará que devuelva el producto con el id especificado, en caso de no existir, debe arrojar un error.
-    console.log(await productos.getProductById(0));
+    console.log(await productos.getProductById(1));
 
     //Se llamará al método “updateProduct” y se intentará cambiar un campo de algún producto, se evaluará que no se elimine el id y que sí se haya hecho la actualización.
-    await productos.updateProduct(0,"manzana","fruta",100,"Sin Imagen","def456",4);
+    const productoActualizado = {
+        title: "manzana",
+        description: "fruta",
+        price: 400,
+        thumbnail: "Sin imagen",
+        code: "def456",
+        stock: 30
+    };
+    await productos.updateProduct(1, productoActualizado);
     console.log(await productos.getProducts());
 
     //Se llamará al método “deleteProduct”, se evaluará que realmente se elimine el producto o que arroje un error en caso de no existir.
-    await productos.deleteProduct(0);
+    await productos.deleteProduct(1);
     console.log(await productos.getProducts());
 }
 
