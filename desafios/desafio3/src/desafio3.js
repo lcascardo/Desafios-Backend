@@ -62,7 +62,7 @@ class ProductManager {
             const product = products.find(product => product.id === id);
             return product ?
                 product :
-                null;
+                {error:"El Producto no existe"};
         }
 
         catch (err) {
@@ -111,18 +111,8 @@ class ProductManager {
 let productos = new ProductManager('productos.txt');
 
 const test = async () => {
-    // Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
-    console.log(await productos.getProducts());
-
-    // Se llamará al método “addProduct” con los campos:
-    // title: “producto prueba”
-    // description:”Este es un producto prueba”
-    // price:200,
-    // thumbnail:”Sin imagen”
-    // code:”abc123”,
-    // stock:25
-    const producto = {
-        title: "producto prueba",
+    let producto = {
+        title: "producto 1",
         description: "Este es un producto prueba",
         price: 200,
         thumbnail: "Sin imagen",
@@ -130,28 +120,89 @@ const test = async () => {
         stock: 25
     };
     await productos.addProduct(producto);
-
-    // Se llamará el método “getProducts” nuevamente, esta vez debe aparecer el producto recién agregado
-    console.log(await productos.getProducts());
-
-    //Se llamará al método “getProductById” y se corroborará que devuelva el producto con el id especificado, en caso de no existir, debe arrojar un error.
-    console.log(await productos.getProductById(1));
-
-    //Se llamará al método “updateProduct” y se intentará cambiar un campo de algún producto, se evaluará que no se elimine el id y que sí se haya hecho la actualización.
-    const productoActualizado = {
-        title: "manzana",
-        description: "fruta",
-        price: 400,
+    producto = {
+        title: "producto 2",
+        description: "Este es un producto prueba",
+        price: 200,
         thumbnail: "Sin imagen",
-        code: "def456",
-        stock: 30
+        code: "abc123",
+        stock: 25
     };
-    await productos.updateProduct(1, productoActualizado);
-    console.log(await productos.getProducts());
-
-    //Se llamará al método “deleteProduct”, se evaluará que realmente se elimine el producto o que arroje un error en caso de no existir.
-    await productos.deleteProduct(1);
-    console.log(await productos.getProducts());
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 3",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 4",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 5",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 6",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 7",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 8",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 9",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
+    producto = {
+        title: "producto 10",
+        description: "Este es un producto prueba",
+        price: 200,
+        thumbnail: "Sin imagen",
+        code: "abc123",
+        stock: 25
+    };
+    await productos.addProduct(producto);
 }
 
-test();
+
+
+module.exports = ProductManager;
