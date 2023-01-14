@@ -1,0 +1,57 @@
+[
+    {
+        "title": "melon",
+        "description": "fruta",
+        "code": "abc123",
+        "price": 200,
+        "status": true,
+        "stock": 4,
+        "category": "fruta",
+        "thumbnail": "Sin imagen",
+        "id": 1
+    },
+    {
+        "title": "pera",
+        "description": "fruta",
+        "code": "abc123",
+        "price": 200,
+        "status": true,
+        "stock": 4,
+        "category": "fruta",
+        "thumbnail": "Sin imagen",
+        "id": 2
+    },
+    {
+        "title": "kiwi",
+        "description": "fruta",
+        "code": "abc123",
+        "price": 200,
+        "status": true,
+        "stock": 4,
+        "category": "fruta",
+        "thumbnail": "Sin imagen",
+        "id": 3
+    },
+    {
+        "title": "durazno",
+        "description": "fruta",
+        "code": "abc123",
+        "price": 200,
+        "status": true,
+        "stock": 4,
+        "category": "fruta",
+        "thumbnail": "Sin imagen",
+        "id": 4
+    },
+    {
+        "title": "sandia",
+        "description": "fruta",
+        "code": "abc123",
+        "price": 200,
+        "status": true,
+        "stock": 4,
+        "category": "fruta",
+        "thumbnail": "Sin imagen",
+        "id": 5
+    }
+]
