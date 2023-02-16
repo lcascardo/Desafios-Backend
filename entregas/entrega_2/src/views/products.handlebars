@@ -1,0 +1,16 @@
+<h1>Lista de Productos</h1>
+
+{{#each products}}
+<p>Producto: {{title}} - Precio: ${{price}} - Categoria: {{category}} - Stock: {{quantity}}</p>
+<button onclick={addProductToCart("{{_id}}")} >Agregar al carrito</button>
+{{/each}}
+
+{{#if hasPrevPage}}
+<a href="/products?page={{prevPage}}"><button>Anterior</button></a>
+{{/if}}
+
+{{#if hasNextPage}}
+<a href="/products?page={{nextPage}}"><button>Siguiente</button></a>
+{{/if}}
+
+<script src="/js/products.js"></script>
