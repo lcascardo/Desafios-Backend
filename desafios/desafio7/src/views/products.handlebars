@@ -1,0 +1,24 @@
+{{#if isLogin}}
+<h1>
+    ¡Bienvenido {{user.first_name}} {{user.last_name}}!
+    Usted tiene el Rol: {{user.rol}}
+</h1>
+<button id="btnLogout">Logout</button>
+{{/if}}
+
+<h2>Lista de Productos</h2>
+
+{{#each products}}
+<p>Producto: {{title}} - Precio: ${{price}} - Categoria: {{category}} - Stock: {{quantity}}</p>
+<button onclick={addProductToCart("{{_id}}")}>Agregar al carrito</button>
+{{/each}}
+
+{{#if hasPrevPage}}
+<a href="/products?page={{prevPage}}"><button>Anterior</button></a>
+{{/if}}
+
+{{#if hasNextPage}}
+<a href="/products?page={{nextPage}}"><button>Siguiente</button></a>
+{{/if}}
+
+<script src="/js/logout.js"></script>
