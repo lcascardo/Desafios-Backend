@@ -3,17 +3,17 @@ import mongoose from "mongoose";
 const cartsCollection = 'carts';
 
 const cartsSchema = new mongoose.Schema({
-    products:{
+    products: {
         type: [
             {
-                product:{
-                    type:String,
-                    ref:"products",
+                product: {
+                    type: String,
+                    ref: "products",
                     require: true,
                 },
                 quantity: {
                     type: Number || 1,
-                    require:true,
+                    require: true,
                 }
             }
         ],
@@ -21,17 +21,13 @@ const cartsSchema = new mongoose.Schema({
         require: true
     },
 
-    user:{
-        type:[
-            {
-                type:mongoose.SchemaTypes.ObjectId,
-                ref:'users',
-            }
-        ],
-        default:[]
+    user: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'users',
+        default: null
     }
 })
 
-const cartsModel = mongoose.model(cartsCollection , cartsSchema);
+const cartsModel = mongoose.model(cartsCollection, cartsSchema);
 
 export default cartsModel;

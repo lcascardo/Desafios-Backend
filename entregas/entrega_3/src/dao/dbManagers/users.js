@@ -15,7 +15,7 @@ export default class Users {
         return result;
     }
 
-    getBy = async (params) => {
+    getById = async (params) => {
         let result = await userModel.findOne(params).populate("cart").lean();
         return result;
     };

@@ -2,10 +2,13 @@ import passport from "passport";
 import local from "passport-local";
 import Users from '../dao/dbManagers/users.js';
 import userModel from "../dao/models/user.js";
+import Carts from "../dao/dbManagers/carts.js";
 import { createHash, isValidPassword } from "../utils.js";
+
 
 const localStrategy = local.Strategy;
 const userManager = new Users();
+const cartManager = new Carts();
 
 const initializePassport = async () => {
     passport.use('register', new localStrategy({ passReqToCallback: true, usernameField: 'email', session: false },
@@ -13,19 +16,24 @@ const initializePassport = async () => {
             try {
                 const {first_name, last_name, email, age } = req.body;
                 if (!first_name || !last_name || !password) return done(null, false, { message: "Incomplete values" });
-                const exists = await userManager.getBy({ email: email });
+                const exists = await userManager.getById({ email: email });
                 if (exists) return done(null, false, { message: "User already exists" });
                 const hashedPassword = await createHash(password);
-
+                
+               let newCart = await cartManager.saveCart();
+                
                 const newUser = {
                     first_name,
                     last_name,
                     email,
                     age,
-                    password: hashedPassword
+                    password: hashedPassword,
+                    cart:newCart._id.toString() 
                 }
 
                 let result = await userManager.saveUser(newUser);
+                
+                cartManager.updateCart(newCart._id,{user:result._id.toString()})
                 return done(null, result)
             }
             catch (error) {

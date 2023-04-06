@@ -1,14 +1,8 @@
-import Carts from "../dao/dbManagers/carts.js";
-import Messages from "../dao/dbManagers/messages.js";
-import Products from "../dao/dbManagers/products.js";
+import User from "../dao/dbManagers/users.js";
 import cartsModel from "../dao/models/carts.js";
 import productsModel from "../dao/models/products.js";
-import User from "../dao/dbManagers/users.js"
 
-const productsManager = new Products();
-const cartsManager = new Carts();
 const usersManager = new User();
-const messagesManager = new Messages();
 
 //Renderizar usuarios
 const renderUsers = async (req,res)=>{

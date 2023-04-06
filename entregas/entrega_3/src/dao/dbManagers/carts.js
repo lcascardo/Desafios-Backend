@@ -16,10 +16,8 @@ export default class Carts {
         return cart;
     }
 
-    saveCart = async () => {
-        let result = await cartsModel.create({
-            products: []
-        });
+    saveCart = async (cart) => {
+        let result = await cartsModel.create(cart);
         return result;
     }
 

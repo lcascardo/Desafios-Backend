@@ -1,5 +1,5 @@
 import Users from "../dao/dbManagers/users.js";
-import Carts from "../dao/models/carts.js";
+import Carts from "../dao/dbManagers/carts.js";
 
 const usersManager = new Users();
 const cartsManager = new Carts();
@@ -18,12 +18,13 @@ const getAll = async (req, res) => {
 
 //Agregar usuario
 const saveUser = async (req, res) => {
-    const { first_name, last_name, email, age } = req.body;
+    const { first_name, last_name, email, age , cart} = req.body;
     let result = await usersManager.saveUser({
         first_name,
         last_name,
         email,
-        age
+        age,
+        cart
     });
     res.send({ status: "success", payload: result });
 }
@@ -31,7 +32,7 @@ const saveUser = async (req, res) => {
 //Agregar usuario a carrito
 const addUserToCart = async (req, res) => {
     const { uid, cid } = req.params;
-    const cart = await cartsManager.getById(cid);
+    const cart = await cartsManager.getOne(cid);
   
     if (!cart)
       return res.status(404).send({ status: "error", error: "Cart not found" });

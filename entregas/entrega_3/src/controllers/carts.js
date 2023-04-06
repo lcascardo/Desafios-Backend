@@ -12,7 +12,14 @@ const getCarts = async (req, res) => {
 
 //Guardar carrito
 const saveCart = async (req, res) => {
-    const result = await cartsManager.saveCart();
+    const {products,user} = req.body
+
+    let newCart = {
+        products,
+        user
+    }
+    
+    const result = await cartsManager.saveCart(newCart);
     res.send({ status: "success", payload: result });
 }
 
@@ -112,6 +119,7 @@ const deleteAllProdFromCart = async (req, res) => {
     let result = await cartsManager.updateCart(cid, cart);
     res.send({ status: "Success", payload: result });
 }
+
 
 export default {
     getCarts,

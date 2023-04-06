@@ -33,6 +33,7 @@ const login = async () => {
         if (!req.user) return res.status(400).send({ status: "error", error: "Contraseña invalida" });
 
         req.session.user = {
+            _id,
             first_name: req.user.first_name,
             last_name: req.user.last_name,
             age: req.user.age,
